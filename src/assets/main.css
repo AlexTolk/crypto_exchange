@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nabla&display=swap');
+body {
+  background: #092D3B;
+  background: linear-gradient(180deg, #092D3B, #30365C);
+  min-height: 100vh;
+  text-align: center;
+}
+h1 {
+  font-family: 'Nabla', cursive, sans-serif;
+  width: 100vw;
+  margin-top: 70px;
+  font-size: 4rem;
+}

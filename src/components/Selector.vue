@@ -1,15 +1,31 @@
 <template>
   <ul>
-    <li>Bitcoin</li>
-    <li>ETH</li>
-    <li>USDT</li>
-    <li>Doge</li>
+    <li @click="selectItem('BTC')" :className="current == 'BTC' ? 'active' : '' ">Bitcoin</li>
+    <li @click="selectItem('ETH')" :className="current == 'ETH' ? 'active' : '' ">ETH</li>
+    <li @click="selectItem('USDT')" :className="current == 'USDT' ? 'active' : ''">USDT</li>
+    <li @click="selectItem('DOGE')" :className="current == 'DOGE'? 'active' : '' ">Dogecoin</li>
   </ul>
 </template>
 
 <script>
   export default{
-
+    props: {
+      setCurrency: {
+        type: Function,
+        required: true
+      }
+    },
+    data() {
+      return {
+        current: ''
+      }
+    },
+    methods: {
+      selectItem(val){
+        this.setCurrency(val);
+        this.current = (val);
+      }
+    }
   }
 </script>
 
@@ -28,7 +44,7 @@
     padding: 20px 0;
     font-family: 'Montserrat', sans-serif;
   }
-  li:hover, li:active {
+  li:hover, li.active {
     background: #24043e;
     cursor: pointer;
   }

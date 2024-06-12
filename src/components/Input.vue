@@ -1,9 +1,8 @@
 <template>
   <input min="0" type="number" @input="changeAmount($event.target.value)" placeholder="input the amount">
   <br>
-  <button @click="convert()">
-    Convert
-  </button>
+  <button @click="convert()">Convert</button>
+  <button @click="favorite()">Add to favorites</button>
 </template>
 
 <script>
@@ -14,6 +13,10 @@
         required: true
       },
       convert: {
+        type: Function,
+        required: true
+      },
+      favorite: {
         type: Function,
         required: true
       }

@@ -5,32 +5,34 @@
     </header>
 
   <main>
-    <Input :changeAmount="changeAmount" :convert="convert"/>
+    <Input :changeAmount="changeAmount" :convert="convert" :favorite="favorite"/>
     <p v-if="result !== 0" className="result-text">{{ result }}</p>
+    <Favorite :favs="favs" v-if="favs.length > 0" :getFromFavs="getFromFavs"/>
     <div class="selectors">
-      <Selector :setCurrency="setFirstCurrency"/>
-
-      <Selector :setCurrency="setSecondCurrency"/>
+      <Selector :setCurrency="setFirstCurrency" :cryptoNow="firstCurrency"/>
+      <Selector :setCurrency="setSecondCurrency" :cryptoNow="secondCurrency"/>
     </div>
   </main>
 </template>
 
 <script>
-  import Input from './components/Input.vue'
-  import Selector from './components/Selector.vue'
+  import Input from './components/Input.vue';
+  import Selector from './components/Selector.vue';
+  import Favorite from './components/Favorite.vue';
   import CryptoConvert from 'crypto-convert';
 
   const convert = new CryptoConvert();
 
   export default {
-    components: { Input, Selector},
+    components: { Input, Selector, Favorite},
     data() {
       return {
         amount: 0,
         firstCurrency: '',
         secondCurrency: '',
         error: '',
-        result: 0
+        result: 0,
+        favs: []
       }
     },
     methods: {
@@ -77,6 +79,16 @@
         }else if (this.firstCurrency == 'USDT' && this.secondCurrency == 'DOGE') {
           this.result = convert.USDT.DOGE(this.amount);
         }
+      },
+      favorite() {
+        this.favs.push({
+          from: this.firstCurrency,
+          to: this.secondCurrency
+        })
+      },
+      getFromFavs(index) {
+        this.firstCurrency = this.favs[index].from
+        this.secondCurrency = this.favs[index].to
       }
     }
   }
